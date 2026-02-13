@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhan Express Logistic - Reliable Transportation by Air, Rail & Road</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Oswald:wght@600;700&display=swap');
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-red: #dc2626;
+            --dark-navy: #0f172a;
+            --light-gray: #f1f5f9;
+            --white: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 90px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container img {
+            height: 70px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: var(--primary-blue);
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--accent-red), #b91c1c);
+            color: white !important;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.4);
+        }
+
+        .cta-button::after {
+            display: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            padding-top: 90px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .animated-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2), transparent);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            bottom: -50px;
+            left: -50px;
+            animation-delay: 5s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            top: 50%;
+            left: 30%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.9); }
+            75% { transform: translate(20px, 30px) scale(1.05); }
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-label {
+            display: inline-block;
+            background: rgba(220, 38, 38, 0.1);
+            color: var(--accent-red);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .hero-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 64px;
+            color: white;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .hero-title .highlight {
+            color: var(--accent-red);
+            display: block;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            color: white;
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(220, 38, 38, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            color: var(--accent-red);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 500;
+        }
+
+        .hero-image {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.3));
+        }
+
+        /* Tracking Section */
+        .tracking-section {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 58, 138, 0.95) 100%),
+                        url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tracking-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(220, 38, 38, 0.1), transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(59, 130, 246, 0.1), transparent 50%);
+            pointer-events: none;
+        }
+
+        .tracking-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tracking-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tracking-logo {
+            width: 120px;
+            height: auto;
+            margin: 0 auto 25px;
+            display: block;
+            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.2));
+        }
+
+        .tracking-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tracking-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+        }
+
+        .tracking-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .tracking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .tracking-input-wrapper {
+            position: relative;
+        }
+
+        .tracking-input {
+            width: 100%;
+            padding: 20px 25px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        .tracking-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .tracking-input:focus {
+            outline: none;
+            background: white;
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+        }
+
+        .tracking-btn {
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .tracking-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+            background: linear-gradient(135deg, #059669, #047857);
+        }
+
+        .tracking-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .tracking-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tracking-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .tracking-info-item i {
+            color: var(--accent-red);
+            font-size: 18px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 120px 40px;
+            background: var(--light-gray);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 80px;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 48px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--secondary-blue);
+        }
+
+        .service-card.popular {
+            border: 2px solid var(--accent-red);
+            background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-red);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 32px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotateY(360deg);
+        }
+
+        .service-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 26px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .service-description {
+            font-size: 15px;
+            color: var(--text-light);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .service-features li {
+            padding: 8px 0;
+            color: var(--text-dark);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .service-link {
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+        }
+
+        .service-link:hover {
+            gap: 12px;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 120px 40px;
+            background: white;
+        }
+
+        .process-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .process-step {
+            position: relative;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 32px;
+            color: white;
+            font-weight: 700;
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+        }
+
+        .step-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .step-description {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Why Choose Us */
+        .why-choose {
+            padding: 120px 40px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .why-choose::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23dots)"/></svg>');
+        }
+
+        .why-choose .section-title,
+        .why-choose .section-description {
+            color: white;
+        }
+
+        .why-choose-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .advantages-list {
+            display: grid;
+            gap: 30px;
+        }
+
+        .advantage-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+        }
+
+        .advantage-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-red);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .advantage-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 22px;
+            color: white;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .advantage-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.7;
+        }
+
+        .why-choose-visual {
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .stat-box-number {
+            font-family: 'Oswald', sans-serif;
+            font-size: 48px;
+            color: var(--accent-red);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-box-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 120px 40px;
+            background: var(--light-gray);
+        }
+
+        .contact-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .info-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .info-text {
+            font-size: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        .info-text a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-text a:hover {
+            color: var(--accent-red);
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--accent-red), #b91c1c);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-navy);
+            color: white;
+            padding: 80px 40px 30px;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-about {
+            max-width: 350px;
+        }
+
+        .footer-logo {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .footer-description {
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent-red);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .gstin {
+            margin-top: 10px;
+            font-size: 13px;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .scroll-top.visible {
+            display: flex;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container,
+            .why-choose-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 90px);
+                background: white;
+                flex-direction: column;
+                padding: 40px;
+                transition: left 0.3s ease;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero-title {
+                font-size: 42px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .services-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-stats,
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .contact-form {
+                padding: 30px;
+            }
+
+            .tracking-box {
+                padding: 30px 20px;
+            }
+
+            .tracking-title {
+                font-size: 28px;
+            }
+
+            .tracking-logo {
+                width: 90px;
+            }
+
+            .tracking-info {
+                gap: 20px;
+            }
+
+            .tracking-btn {
+                font-size: 16px;
+                padding: 18px 30px;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0;
+        }
+
+        .fade-in-up:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in-up:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in-up:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in-up:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Farhan Express Logistic" id="logoImg">
+                <div class="logo-text">FARHAN EXPRESS</div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#why-us">Why Us</a></li>
+                <li><a href="#contact" class="cta-button">Get Quote</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="animated-bg">
+            <div class="floating-shape shape-1"></div>
+            <div class="floating-shape shape-2"></div>
+            <div class="floating-shape shape-3"></div>
+        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <span class="hero-label">🌍 Global Logistics Solutions</span>
+                <h1 class="hero-title">
+                    Fast & Reliable
+                    <span class="highlight">Logistics Services</span>
+                </h1>
+                <p class="hero-description">
+                    Farhan Express Logistic provides seamless transportation solutions by Air, Rail, and Road. 
+                    We deliver your cargo with precision, care, and unmatched reliability across India and beyond.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Request Quote</a>
+                    <a href="#services" class="btn btn-secondary">Our Services</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Deliveries Daily</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">On-Time Delivery</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Customer Support</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="C:\Users\User\Desktop\WhatsApp Image 2026-02-13 at 12.20.58 PM.jpeg" alt="Logistics" id="heroLogoImg">
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking Section -->
+    <section class="tracking-section" id="tracking">
+        <div class="tracking-container">
+            <div class="tracking-header">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Farhan Express Logo" class="tracking-logo" id="trackingLogoImg">
+                <h2 class="tracking-title">Track Your Shipment</h2>
+                <p class="tracking-subtitle">Enter your booking number to track your shipment in real-time</p>
+            </div>
+            <div class="tracking-box">
+                <form class="tracking-form" id="trackingForm">
+                    <div class="tracking-input-wrapper">
+                        <input 
+                            type="text" 
+                            class="tracking-input" 
+                            id="bookingNumber"
+                            placeholder="Search by Booking no(e.g.MILdxxxxxx)"
+                            required
+                        >
+                    </div>
+                    <button type="submit" class="tracking-btn">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </form>
+                <div class="tracking-info">
+                    <div class="tracking-info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Real-time updates</span>
+                    </div>
+                    <div class="tracking-info-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure tracking</span>
+                    </div>
+                    <div class="tracking-info-item">
+                        <i class="fas fa-bell"></i>
+                        <span>SMS & Email alerts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <span class="section-label">Our Services</span>
+            <h2 class="section-title">Comprehensive Logistics Solutions</h2>
+            <p class="section-description">
+                We offer a complete range of transportation services tailored to your specific needs, 
+                ensuring your cargo reaches its destination safely and on time.
+            </p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card popular fade-in-up">
+                <span class="popular-badge">Most Popular</span>
+                <div class="service-icon">
+                    <i class="fas fa-plane"></i>
+                </div>
+                <h3 class="service-title">Air Freight</h3>
+                <p class="service-description">
+                    Fast and reliable air freight services for your time-sensitive shipments. 
+                    We handle your cargo with precision and ensure swift delivery worldwide.
+                </p>
+                <ul class="service-features">
+                    <li>Express delivery options</li>
+                    <li>Real-time tracking</li>
+                    <li>Customs clearance assistance</li>
+                    <li>Temperature-controlled shipping</li>
+                </ul>
+                <a href="#contact" class="service-link">Request Quote <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card fade-in-up">
+                <div class="service-icon">
+                    <i class="fas fa-truck"></i>
+                </div>
+                <h3 class="service-title">Road Freight</h3>
+                <p class="service-description">
+                    Cost-effective and flexible road freight solutions for domestic and cross-border 
+                    transportation with full tracking capabilities.
+                </p>
+                <ul class="service-features">
+                    <li>Full Truck Load (FTL)</li>
+                    <li>Part Truck Load (PTL)</li>
+                    <li>Door-to-door delivery</li>
+                    <li>Flexible scheduling</li>
+                </ul>
+                <a href="#contact" class="service-link">Request Quote <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card fade-in-up">
+                <div class="service-icon">
+                    <i class="fas fa-train"></i>
+                </div>
+                <h3 class="service-title">Train Freight</h3>
+                <p class="service-description">
+                    Secure and reliable train freight services for long-distance transportation. 
+                    Ideal for heavy and bulk cargo across the country.
+                </p>
+                <ul class="service-features">
+                    <li>Cost-effective for bulk cargo</li>
+                    <li>Environmentally friendly</li>
+                    <li>Dedicated rail containers</li>
+                    <li>Nationwide network</li>
+                </ul>
+                <a href="#contact" class="service-link">Explore <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <div class="service-card fade-in-up">
+                <div class="service-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h3 class="service-title">Door to Door Delivery</h3>
+                <p class="service-description">
+                    Complete end-to-end logistics solution ensuring your packages reach their 
+                    destination with precision, care, and total peace of mind.
+                </p>
+                <ul class="service-features">
+                    <li>Complete pickup & delivery</li>
+                    <li>No handling required</li>
+                    <li>Insurance coverage</li>
+                    <li>Signature confirmation</li>
+                </ul>
+                <a href="#contact" class="service-link">Get Started <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="process-container">
+            <div class="section-header">
+                <span class="section-label">How It Works</span>
+                <h2 class="section-title">Our Seamless Process</h2>
+                <p class="section-description">
+                    Our process is designed for efficiency and transparency, ensuring a smooth experience 
+                    from start to finish with complete visibility every step of the way.
+                </p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step fade-in-up">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Research & Planning</h3>
+                    <p class="step-description">
+                        We start by understanding your specific logistics needs and planning the most 
+                        effective and efficient route for your shipment, considering all variables.
+                    </p>
+                </div>
+                <div class="process-step fade-in-up">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Booking & Documentation</h3>
+                    <p class="step-description">
+                        We handle all the booking and documentation, ensuring all paperwork is in order 
+                        for seamless transit across borders and checkpoints.
+                    </p>
+                </div>
+                <div class="process-step fade-in-up">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Tracking & Monitoring</h3>
+                    <p class="step-description">
+                        With our advanced tracking systems, you can monitor your shipment's progress 
+                        in real-time from pickup to delivery with complete transparency.
+                    </p>
+                </div>
+                <div class="process-step fade-in-up">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Delivery & Confirmation</h3>
+                    <p class="step-description">
+                        We ensure your shipment is delivered safely and on time, with confirmation 
+                        provided upon completion and proof of delivery documentation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-choose" id="why-us">
+        <div class="section-header">
+            <span class="section-label">Why Choose Farhan Express</span>
+            <h2 class="section-title">Your Trusted Logistics Partner</h2>
+            <p class="section-description">
+                We combine industry expertise with a proactive approach to ensure your supply chain 
+                is efficient, cost-effective, and reliable. Your success is our success.
+            </p>
+        </div>
+        <div class="why-choose-content">
+            <div class="advantages-list">
+                <div class="advantage-item fade-in-up">
+                    <div class="advantage-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="advantage-title">Unmatched Reliability</h3>
+                    <p class="advantage-description">
+                        98% on-time delivery rate with comprehensive insurance coverage. We take full 
+                        responsibility for your cargo from pickup to final delivery with zero compromise.
+                    </p>
+                </div>
+                <div class="advantage-item fade-in-up">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="advantage-title">Real-Time Tracking</h3>
+                    <p class="advantage-description">
+                        Advanced GPS tracking and monitoring systems provide complete visibility. Get instant 
+                        updates via SMS, email, or our mobile app at every checkpoint.
+                    </p>
+                </div>
+                <div class="advantage-item fade-in-up">
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="advantage-title">Dedicated Support Team</h3>
+                    <p class="advantage-description">
+                        24/7 customer support with dedicated account managers. Proactive communication and 
+                        personalized service ensure all your concerns are addressed immediately.
+                    </p>
+                </div>
+                <div class="advantage-item fade-in-up">
+                    <div class="advantage-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3 class="advantage-title">Extensive Network</h3>
+                    <p class="advantage-description">
+                        Global logistics network with local expertise. Seamless connections across India and 
+                        international destinations with strategic partnerships worldwide.
+                    </p>
+                </div>
+                <div class="advantage-item fade-in-up">
+                    <div class="advantage-icon">
+                        <i class="fas fa-rupee-sign"></i>
+                    </div>
+                    <h3 class="advantage-title">Cost-Effective Solutions</h3>
+                    <p class="advantage-description">
+                        Competitive pricing without compromising quality. Flexible payment terms and transparent 
+                        billing with no hidden charges or unexpected fees.
+                    </p>
+                </div>
+                <div class="advantage-item fade-in-up">
+                    <div class="advantage-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3 class="advantage-title">Flexible & Scalable</h3>
+                    <p class="advantage-description">
+                        Solutions that adapt to your business needs. Whether you're a startup or enterprise, 
+                        we scale our services to match your growth trajectory.
+                    </p>
+                </div>
+            </div>
+            <div class="why-choose-visual">
+                <div class="stats-grid">
+                    <div class="stat-box fade-in-up">
+                        <span class="stat-box-number">10K+</span>
+                        <span class="stat-box-label">Happy Clients</span>
+                    </div>
+                    <div class="stat-box fade-in-up">
+                        <span class="stat-box-number">50K+</span>
+                        <span class="stat-box-label">Shipments Delivered</span>
+                    </div>
+                    <div class="stat-box fade-in-up">
+                        <span class="stat-box-number">15+</span>
+                        <span class="stat-box-label">Years Experience</span>
+                    </div>
+                    <div class="stat-box fade-in-up">
+                        <span class="stat-box-number">100%</span>
+                        <span class="stat-box-label">Client Satisfaction</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-header">
+            <span class="section-label">Get In Touch</span>
+            <h2 class="section-title">Request a Quote</h2>
+            <p class="section-description">
+                Have a shipment or need logistics consultation? Contact us today for a free quote 
+                and let us handle your transportation needs with expertise.
+            </p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-card fade-in-up">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3 class="info-title">Call Us</h3>
+                    <p class="info-text">
+                        <a href="tel:+918155011550">+91 8155011550</a><br>
+                        Available 24/7 for your queries
+                    </p>
+                </div>
+                <div class="info-card fade-in-up">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3 class="info-title">Email Us</h3>
+                    <p class="info-text">
+                        <a href="mailto:farhanexpresslogistics@gmail.com">farhanexpresslogistics@gmail.com</a><br>
+                        We'll respond within 2 hours
+                    </p>
+                </div>
+                <div class="info-card fade-in-up">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3 class="info-title">Visit Us</h3>
+                    <p class="info-text">
+                        Shop No. D/1-13, Sumel 10, Phase-2<br>
+                        MH Mills, Near Ambedkar Hall<br>
+                        Kalupur Railway Station, Saraspur<br>
+                        Ahmedabad - 380018, Gujarat, India
+                    </p>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="Enter your phone">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service Required *</label>
+                    <select id="service" name="service" required>
+                        <option value="">Select a service</option>
+                        <option value="air">Air Freight</option>
+                        <option value="road">Road Freight</option>
+                        <option value="train">Train Freight</option>
+                        <option value="door">Door to Door Delivery</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your requirements"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" alt="Farhan Express" class="footer-logo" id="footerLogoImg">
+                <p class="footer-description">
+                    Farhan Express Logistic is your trusted partner for all transportation needs. 
+                    We deliver excellence through innovation, reliability, and customer-first approach.
+                </p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">Our Process</a></li>
+                    <li><a href="#why-us">Why Choose Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#services">Air Freight</a></li>
+                    <li><a href="#services">Road Freight</a></li>
+                    <li><a href="#services">Train Freight</a></li>
+                    <li><a href="#services">Door to Door</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#contact">Get Quote</a></li>
+                    <li><a href="tel:+918155011550">Track Shipment</a></li>
+                    <li><a href="#contact">Customer Support</a></li>
+                    <li><a href="#contact">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Farhan Express Logistic. All rights reserved.</p>
+            <p class="gstin">GSTIN: 24DBOPM8127E1ZI | Owner: Mansuri Mohammed Farhan Mohammed Faruq</p>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 90;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your inquiry! We will get back to you within 2 hours.');
+            contactForm.reset();
+        });
+
+        // Tracking form submission
+        const trackingForm = document.getElementById('trackingForm');
+        trackingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const bookingNumber = document.getElementById('bookingNumber').value;
+            
+            if (bookingNumber.trim()) {
+                // Simulate tracking search
+                alert(`Searching for booking number: ${bookingNumber}\n\nTracking Status:\n✓ Shipment picked up\n✓ In transit\n⏳ Expected delivery: Tomorrow\n\nYou will receive SMS and email updates.`);
+                
+                // Optionally, you can redirect to a tracking results page or show results in a modal
+                // window.location.href = `/track?booking=${bookingNumber}`;
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Load the uploaded logo image
+        // Load the uploaded logo image
+// Load logo with error handling
+const logoPath = "./logo.jpg"; // Added ./ for relative path
+
+// Set logo with fallback
+const logoElements = ['logoImg', 'heroLogoImg', 'footerLogoImg', 'trackingLogoImg'];
+logoElements.forEach(id => {
+    const element = document.getElementById(id);
+    if (element) {
+        element.src = logoPath;
+        element.onerror = function() {
+            console.error('Logo not found:', logoPath);
+            this.style.display = 'none'; // Hide if not found
+        };
+    }
+});
+
+        // Counter animation for stats
+        const animateCounter = (element, target) => {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.textContent.includes('+') ? '+' : element.textContent.includes('%') ? '%' : '');
+                }
+            }, 20);
+        };
+
+        // Trigger counter animation when stats come into view
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const number = entry.target.querySelector('.stat-number, .stat-box-number');
+                    if (number && !number.dataset.animated) {
+                        const text = number.textContent;
+                        const value = parseInt(text.replace(/[^0-9]/g, ''));
+                        number.dataset.animated = 'true';
+                        animateCounter(number, value);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stat-item, .stat-box').forEach(stat => {
+            statsObserver.observe(stat);
+        });
+    </script>
+</body>
+</html>
